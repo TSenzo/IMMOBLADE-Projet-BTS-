@@ -21,4 +21,5 @@ Ceci est le dépôt du projet sur le suivi des données de l'entreprise IMMOBLAD
 - Faire glisser le shéma de la base de données et faire RunSQL.
 - Faire glisser les autres fichiers SQL.
 - !!!!Attention il peut avoir un ordre d'importation des fichiers SQL.
-- Voici normalement vous avez votre base de données complète.
+
+----------------------------------------------------------------
