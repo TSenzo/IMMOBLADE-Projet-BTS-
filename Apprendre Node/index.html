@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.0.0/dist/vue.global.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p>Date: {{ date }}</p>
+    <p>Temperature: {{ temperature }}</p>
+  </div>
+
+  <script>
+    // Création de l'appli Vue.js
+    const app = Vue.createApp({
+      data() {
+        return {
+          date: null,
+          temperature: null
+        };
+      },
+      // Dès que Vue est chargée
+      mounted() {
+        // Ici ça ne change pas. Axios s'utilise de la même façon
+        axios
+          .get('http://localhost:3000/api/data/1')
+          .then(response => {
+            this.date = response.data.date;
+            this.temperature = response.data.donnee;
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
+    });
+  </script>
+</body>
+</html>
