@@ -14,12 +14,6 @@ Ceci est le dépôt du projet sur le suivi des données de l'entreprise IMMOBLAD
 
 --------------------------------------------------------------
 
----------- Comment importer une table SQL sur Netbeans ?------
 
-- Ouvrir Netbeans
-- Ouvrir votre explorateurs de fichiers pour allez dans le dossier où se trouve la table SQL.
-- Faire glisser le shéma de la base de données et faire RunSQL.
-- Faire glisser les autres fichiers SQL.
-- !!!!Attention il peut avoir un ordre d'importation des fichiers SQL.
 
-----------------------------------------------------------------
+
