@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>IMMOBLADE</title>
+    <link rel="stylesheet" href="./style/styledeRuben.css">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script> -->
+    <script src="./js/vue.js" ></script>
+    <script src="https://unpkg.com/vue-router@3.0.0/dist/vue-router.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.1.1/chart.umd.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!------------------------------------------ Navigation ------------------------------------------------->
+        <nav>
+            <ul class="flexbox">
+                <router-link to="/">
+                    <li><img src="./image/LogoImmo.png" id="image-immoblade"></li>
+                </router-link>
+                <router-link to="/Campagnes">
+                    <li>Campagnes</li>
+                </router-link>
+                <!-- <router-link to="/Capteurs">
+                    <li>Campagnes</li>
+                </router-link> -->
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
+    </div>
+
+
+    <!------------------------------------------ Home Page ------------------------------------------------->
+
+    <script type="text/x-template" id="home">
+        <div class="home">
+            <h2 class="title-campagne">Campagnes en cours :</h2>
+            <div class="container-block">
+                <div v-for="item in test">
+                            <router-link to="/temperature">
+                                <div class="hautgauche">
+                                    <div class="text">
+                                        <br class="adresse">Adresse: 33 Bd Victor Hugo, 31770 Colomiers <br>
+                                        <br class="company">L'entreprise: Lycée Victor Hugo <br>
+                                    </div>
+                                    <div>
+                                        <h3>Mesures:</h3>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Grandeurs</th>
+                                                    <th>Salle Témoin</th>
+                                                    <th>Salle équipée</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        Température
+                                                    </td>
+                                                    <td>
+                                                        {{salleTemoinTemperature}}°C
+                                                    </td>
+                                                    <td>
+                                                        {{salleEquipeTemperature}}°C
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Luminosité
+                                                    </td>
+                                                    <td>
+                                                        {{salleTemoinLuminosite}} lux
+                                                    </td>
+                                                    <td>
+                                                        {{salleEquipeLuminosite}} lux
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Flux Solaire
+                                                    </td>
+                                                    <td>
+                                                        {{salleEquipeFluxSolaire}} W/m2
+                                                    </td>
+                                                    <td>
+                                                        {{salleTemoinFluxSolaire}} W/m2
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="progress-bar-container">
+                                        <h3>Avancement</h3>
+                                        <div class="progress-bar" role="progressbar" :style="{ width: progress + '%' }"
+                                            aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100">
+                                                {{ progress }}% 
+                                        </div>
+                                    </div>
+                                </div>
+                            </router-link>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </script>
+
+
+    <!------------------------------------------ Liste des campagnes  ------------------------------------------------->
+
+    <script type="text/x-template" id="campagnes">
+        <div>
+           <h1> Campagnes </h1>
+           <router-link to="/Campagnes/AjoutCampagne"><h2>Ajouter une campagne</h2></router-link>
+            <div class="campagnes-container">
+                
+            </div>
+        </div>
+    </script>
+
+    <script type="text/x-template" id="ajtCamp">
+        <div>
+           <h1> Ajout d'une Campagne </h1>
+            <div class="capteurs-container">
+                <form>
+                    <input type="text" placeholder="Adresse" name="adresse" v-model="newCampagne.adresse">
+                    <input type="text" placeholder="Nom de l'Entreprise" name="entreprise" v-model="newCampagne.entreprise">
+                    <button @click="addCampagne()">Ajouter</button>
+                </form>
+                <ul v-for= "item in listCampagne">
+                    <li>{{item.adresse}}</li>
+                    <li>{{item.entreprise}}</li>
+                </ul>
+            </div>
+            <div class="alert-container" v-if="errors.length">
+                <p class="alert" v-for="error in errors"> {{error}} </p>
+            </div>
+        </div>
+    </script>
+
+    <!------------------------------------------ Test Acquisition de données ------------------------------------------------->
+
+    <script type="text/x-template" id="temperature">
+        <div class="temp-page">
+            <h1 class="title">Les données</h1>
+            <div class="container-items">
+                <table id="tableau-temperature">
+                    <caption align="top">Températures</caption>
+                    <thead>
+                        <tr>
+                            <th v-for=" titre in colonnes">
+                                {{titre}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in donnees">
+                            <td>
+                                {{item.date}}
+                            </td>
+                            <td>
+                                {{item.num}}°C
+                            </td>
+                            <td>
+                                <!-- {{item.temperature}}°C -->
+                                <!-- Test Unitaire -->
+                                {{item.num}}°C
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="container-canvas">
+                    <canvas id="myChartTempBlade"></canvas>
+                </div>
+                <script type="module" src="./js/myChart.js"></script>
+    </div>
+    </div>
+    </script>
+
+
+
+    <!------------------------------------------ Capteurs ------------------------------------------------->
+
+    <script type="text/x-template" id="capteurs">
+        <div>
+           <h1> Capteurs </h1>
+            <table class="capteurs-container">
+                <tbody>
+                    <tr v-for="item in donnees" >
+                        
+                        <td class="capteurs">
+                            {{item.name}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </script>
+    <footer class="pied-page">
+        <p>Copyright © 2023 IMMOBLADE</p>
+    </footer>
+
+
+
+    <script type="module" src="./js/leSiteVue.js" defer></script>
+
+    <!-- <script type="module" src="./js/script.js"></script> -->
+</body>
+
+</html>

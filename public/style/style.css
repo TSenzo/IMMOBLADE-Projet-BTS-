@@ -1,0 +1,58 @@
+/*--------- Page Température ---------*/
+
+#tableau-temperature {
+    border: 2px solid #fcba0d;
+    border-radius: 3px;
+    background-color: #fff;
+    table-layout: auto;
+    width: 30%;
+}
+
+thead {
+    background-color: #fcba0d;
+}
+
+td {
+    background-color: aliceblue;
+    text-align: center;
+}
+.title {
+    align-self: flex-start;
+}
+.temp-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#mise-a-jour {
+    width: 20%;
+
+}
+
+/*---------- Nav Barre -----------*/
+
+
+.items-navs {
+    display: flex;
+    margin: auto;
+}
+
+.logo {
+    flex: 1;
+    
+}
+.temperature {
+    flex: 2;
+   justify-content: center;
+}
+
+.capteurs {
+    flex: 3;
+    margin-left: 8em;
+}
+
+.campagnes {
+    flex: 4;
+    margin-left: 8em;
+}
