@@ -1,19 +1,25 @@
-# Projet2023
-Ceci est le dépôt du projet sur le suivi des données de l'entreprise IMMOBLADE
+# suividesmesures
 
+## Project setup
+```
+dnf install npm
+npm install
+```
 
----------- Comment avoir le dépôt sur sa machine ?-----------
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-- Ouvrir Visual Studio Code 
-- Si nécessaire : Fichier > Fermer le dossier
-- Aller dans l'un des onglets suivants : "Explorateur", "Contrôle de code source"
-- Cliquer sur "Cloner le dépôt"
-- Cliquer sur "Cloner à partir de Github"
-- Cliquer sur "msenard/Projet2023"
-- Sélectionner le dossier dans lequel le dépôt va être cloné
+### Compiles and minifies for production
+```
+npm run build
+```
 
---------------------------------------------------------------
+### Lints and fixes files
+```
+npm run lint
+```
 
-
-
-
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
